@@ -1,0 +1,27 @@
+Q7. Creating and Using a Role
+ • Create a role called apache in /home/admin/ansible/roles with the following requirement: 
+- The httpd package is install, enabled on boot and started 
+- The Firewall is enabled & running with a rule to allow access the web server 
+- A template file index.html.j2 exists and is used to create the file /var/www/html/index.html with the content:
+“Welcome to HOSTNAME ON IPADDRESS” HOSTNAME is the fqdn of the managed nodes and IPADDRESS is the ip address of managed host
+• create a playbook called /home/admin/ansible/newrole.yml that uses this role as follow: The Playbook runs on host in the webservers host group
+Solution:
+$ cd /home/devops/ansible/roles
+$ ansible-galaxy init apache
+$ cd apache/tasks 
+$ vim main.yml
+$ cd ../template 
+$ vim index.html.j2
+
+$ cd /ansible/httpd.yml
+
+
+$ ansible-playbook httpd.yml –syntax-check
+$ ansible-playbook httpd.yml 
+$ cd /var/www/html/
+$ vi index.html
+
+To verify
+ . To Give ip address or hostname in web browser and it will show proper output as per our file entry, or
+ • ansible all -m command -a “curl localhost”
+
