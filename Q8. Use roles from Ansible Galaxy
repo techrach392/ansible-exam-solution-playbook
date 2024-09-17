@@ -1,0 +1,66 @@
+Q8. Use roles from Ansible Galaxy 
+• Create a playbook called /home/admin/ansible/roles.yml 
+• The playbook contains a play that runs on host in the balances host group and uses the 
+balances role. 
+ - This role configures a service to load balance web server request between hosts in the 
+webserver host group. 
+- Browsing to host in the balances host group ( for example http://system5.domain1.example.com) 
+produces the following output:
+- Welcome to system3.domain1.example.com on 172.24.1.8 
+• Reloading the Browser produces output from the Alternate webserver: 
+- Welcome to system4.domain1.example.com on 172.24.1.9 
+• The Playbook contains a play the runs on hosts in webserver host group and user the 
+phpinfo role. 
+• Browsing to host in the webserver host group with the URL /hello.php produces the 
+following output : 
+• Hello PHP World from FQDN - For example Browsing to http://system3.domain1.example.com/
+hello.php produces the following output: 
+- Hello PHP World from system3.domain1.example.com along with various details of the PHP 
+configuration include the version of PHP that is installed. 
+• Similarly, browsing to http://system4.doamin1.example.com/hello.php, produces the following 
+output: 
+- Hello PHP World from system4.domain1.example.com along with various details of the PHP 
+configuration including the version of PHP that is installed. 
+
+solution
+Go as Root User: 
+$ yum install haproxy 
+$ vim /etc/haproxy/haproxy.cfg (Use this file as a reference file for the next part of the question) Switch back to admin user:
+ $ vim /home/admin/ansible/roles/balancer/template/balancer.j2
+(Orange is the text that will already be there) (Black Text are the lines we need to add or modify accordingly)
+
+# main frontend which proxys to the backends 
+#--------------------------------------------------------------------- 
+frontend main 
+bind *:80
+acl url_static  path_beg  -i /static /images /javascript / stylesheets 
+acl url_static path_end -i .jpg .gif .png .css .js
+ use_backend static        if url_staticdefault_backend   ap
+#--------------------------------------------------------------------- 
+# static backend for serving up images, stylesheets and such
+ #--------------------------------------------------------------------- 
+backend static 
+balance roundrobin 
+server static 127.0.0.1:4331 check 
+#---------------------------------------------------------------------
+ # round robin balancing between the various backends
+ #---------------------------------------------------------------------
+ backend app
+ balance roundrobin 
+server node3.domainX.example.com 172.25.250.12:80 check
+server node4.domainX.example.com 172.25.250.13:80 check
+
+$ vim balance.yml
+ 
+
+$ ansible-playbook balance.yml 
+• To Verify:
+ • We will ping the balancer group IP/hostname, each time we refresh it in the browser we see the output changing as the server alternates between node3 and node4 as per our entry.
+
+
+
+
+
+
+
+
