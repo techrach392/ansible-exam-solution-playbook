@@ -5,3 +5,10 @@ Create a playbook called /home/admin/ansible/issue.yml
 - On host is the dev host group, the line reads: Development
 - On hosts in the test host group, the line read: Test 
 - On hosts in the prod hosts group, the line read: Production
+
+solution:
+$ vim modify.yml
+$ ansible-playbook modify.yml 
+• To Verify: 
+• ansible all -m command -a “cat /etc/issue”
+
