@@ -1,3 +1,20 @@
 Q. 17 Use a RHEL System Role 
 • Create a playbook name selinux.yml and use system roles to: 
 • Set selinux mode as enforcing in all manage node
+
+solution
+
+Go to SELinux System Role 
+$ cd /usr/share/ansible/roles/rhel-system-roles.selinux 
+$ vim README.md
+
+Go to “” ### selinux role “” line 
+We will find the sample playbook as well the parameter to set selinux_state as 
+enforcing so we will 
+
+$ vim selinux.yml
+
+(This is how to playbook will look after copying and setting the alignments) 
+ 
+• To Verify: 
+• ansible all -m command -a “cat /etc/selinux/config”
