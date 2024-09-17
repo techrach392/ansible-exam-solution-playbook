@@ -1,0 +1,7 @@
+Q10. Modify File Content 
+Create a playbook called /home/admin/ansible/issue.yml 
+• The playbook runs on all inventory hosts 
+• The playbook replaces the content of /etc/issue with a single line of text as follows: 
+- On host is the dev host group, the line reads: Development
+- On hosts in the test host group, the line read: Test 
+- On hosts in the prod hosts group, the line read: Production
