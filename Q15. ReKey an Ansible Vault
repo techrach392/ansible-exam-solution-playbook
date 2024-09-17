@@ -3,4 +3,17 @@ Rekey an existing Ansible vault as follows:
 • Download the Ansible vault from http://server.network.example.com/materials/salariries.yml
 to /home/admin/ansible/ and make the following amendments: 
 - The current vault password is jaishreeram 
-- The new vault password is jaimatadi
+- The new vault p
+assword is jaimatadi
+
+solution:
+$ wget http://192.168.10.254/ex407/secret.yml 
+
+$ ansible-vault rekey secret.yml 
+
+old password: jaishreeram 
+new password: jaimatadi
+• To Verify: 
+• ansible-vault view secret.yml 
+• New password should make it work 
+
