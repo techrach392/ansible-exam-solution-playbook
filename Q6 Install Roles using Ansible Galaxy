@@ -1,0 +1,11 @@
+Q6. 
+Install Roles using Ansible Galaxy 
+• Download and install role to /home/admin/ansible/roles from following URL: • http://server.network.example.com/materials/haproxy.tar The Name of the role should be balancer
+ • http://server.network.example.com/materials/phpinfo.tar The name of this role should be phpinfo
+Cd /home/devops/ansible/roles
+ $  cd roles
+$ Vi requirement.yml
+
+solution:
+$ ansible-galaxy install -r requirement.yml -p .
+Note: [ check 2 dir creted one is name balancer and 2nd is name phpinfo
