@@ -1,0 +1,3 @@
+Q. 17 Use a RHEL System Role 
+• Create a playbook name selinux.yml and use system roles to: 
+• Set selinux mode as enforcing in all manage node
