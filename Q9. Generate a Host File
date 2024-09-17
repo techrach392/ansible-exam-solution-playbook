@@ -1,0 +1,40 @@
+Download an initial template file from http://server.network.example.com/materials/host.j2 to 
+/home/admin/ansible 
+• Complete the template so that it can he used to generate a file with a 
+line for each host in thesame format as /etc/hosts 
+• Download a certain playbook using the given link: http://server.network.example.com/materials/
+host.yml
+This playbook will automatically save the info of all managed nodes as mentioned by you in the 
+hosts.j2 in the dev hosts group. 
+• Do not make any changes to this playbook 
+• When the playbook is run, the file /etc/myhosts on host in the dev host group should 
+have a line foreach managed hosts:
+127.0.0.1 localhost localhost.localdoamin localhost4 localhost4.localdomain 
+::1 localhost localhost.localdoamin localhost6 
+localhost6.localdomain172.24.10.6
+system1.domain1.example.com system1 
+7. system2.doamin1.example.com system2 
+8. system3.doamin1.example.com system3 
+9. system4.doamin1.example.com system4 
+10. system5.doamin1.example.com system5 
+Note: The order in which the inventory host names appear is not important. 
+
+
+solution:
+
+$ wget http://192.168.10.254/ex407/hosts.j2 
+$ vim hosts.j2 
+(Do not modify the existing entries, we will append at the end of file) 
+ 
+{% for host in groups['all'] %} 
+{{ hostvars[host].ansible_default_ipv4.address }} {{ hostvars[host].ansible_fqdn }} 
+{{ hostvars[host].ansible_hostname }} 
+{% endfor %}
+
+$ wget http://server.network.example.com/materials/gen_hosts.yml 
+(Do not make any changes in this file)
+$ ansible-playbook gen_hosts.yml
+
+• To Verify: 
+• ansible dev -m command -a “cat /etc/myhosts”
+
