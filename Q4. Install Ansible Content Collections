@@ -1,0 +1,19 @@
+Q4. Install Ansible Content Collections
+ • Location of Collection inside http://utility.lab13. com/materials
+1.	install the redhat.rhel_system_roles-1.19.3.tar.gz collection
+2. install the posix-1.20.2.tar.gz collection
+3. install the community-general-5.5.0.tar.gz collection
+
+verification
+$ mkdir /home/devops/ansible/mycollection
+$ Cd my collection
+$ wget  http://utility.lab13. com/materials/redhat.rhel_system_roles-1.19.3.tar.gz 
+$wget http://utility.lab13. com/materials/posix-1.20.2.tar.gz
+$wget http://utility.lab13. com/materials/ community-general-5.5.0.tar.gz 
+
+$ ansible-galaxy collection install redhat.rhel_system_roles-1.19.3.tar.gz
+$ ansible-galaxy collection install posix-1.20.2.tar.gz
+$ ansible-galaxy collection install community-general-5.5.0.tar.gz
+ 
+• To Verify 
+• You will see the collections installed in the given directory and they will be decompressed from their original .tar.gz format
