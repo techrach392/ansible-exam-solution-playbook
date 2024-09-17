@@ -1,0 +1,26 @@
+Q14. Create User Accounts
+• Download a list of users to be created from http://server.network.example.com/materials/
+user_list.yml 
+• Using the password vault /home/admin/ansible/locker.yml create elsewhere in this exam 
+• Your playbook should work using the vault password file /home/admin/ansible/secret.txt created 
+elsewhere in this exam
+• User with a job description of manager should be created in dev and test host groups with: 
+- assigned the password from mgr_pass variable 
+- a member of supplementary group opsmgr 
+- password should use the SHA512 hash format 
+• User with job description of developer should be created in prod host group with: 
+- create a member of supplementary group devops 
+- create on managed node in the dev and test host group 
+- assigned the password from the dev_pass variable
+
+solution
+
+$ wget http://192.168.10.254/ex407/user_list.yml
+$ vim create_user.yml
+After this is complete need to make a change inside ansible.cfg file: 
+(Make entry below collections_paths) 
+vault_password_file= password.txt 
+• To Verify: 
+• ansible all -m command -a “id bob” 
+• ansible all -m command -a “id alice”
+
